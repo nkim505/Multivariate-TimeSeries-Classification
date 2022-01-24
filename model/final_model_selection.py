@@ -25,14 +25,14 @@ def final_model_selection(x_train, y_train, x_test, y_test):
         rfr_predictions = [round(value) for value in rfr_pred]
         accuracy_rf = accuracy_score(y_test, rfr_predictions)
 
-        # mse 기준으로 모델간 비교하여 best 모델선정
-        if min(accuracy_lgbm, accuracy_xgb , accuracy_rf) == accuracy_lgbm:
+        # accuracy score를 기준으로 모델간 비교하여 best 모델선정
+        if max(accuracy_lgbm, accuracy_xgb , accuracy_rf) == accuracy_lgbm:
                 params= params_lgbm
                 model= LGBMClassifier()
-        elif min(accuracy_lgbm, accuracy_xgb , accuracy_rf) == accuracy_xgb:
+        elif max(accuracy_lgbm, accuracy_xgb , accuracy_rf) == accuracy_xgb:
                 params= params_xgb
                 model= XGBClassifier()
-        elif min(accuracy_lgbm, accuracy_xgb , accuracy_rf) == accuracy_rf:
+        elif max(accuracy_lgbm, accuracy_xgb , accuracy_rf) == accuracy_rf:
                 params= params_rf
                 model= RandomForestClassifier()
 
